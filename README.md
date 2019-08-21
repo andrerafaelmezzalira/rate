@@ -6,7 +6,7 @@
 
 ## Preparando ambiente
   
-- na raiz, execute os comandos
+- na raiz do projeto, execute os comandos
 
 ```
 mvn clean 
