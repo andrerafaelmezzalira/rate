@@ -17,7 +17,7 @@ public class CalculateService extends PrevaylerService {
 
 	public Double calculate(Integer dddOrigin, Integer dddTarget, Integer minutes, Integer minutesPlan)
 			throws Exception {
-		Object object = getPrevayler().execute(new Query() {
+		return (double) getPrevayler().execute(new Query() {
 
 			@Override
 			public Object query(Object data, Date date) throws Exception {
@@ -73,6 +73,5 @@ public class CalculateService extends PrevaylerService {
 				return null;
 			}
 		});
-		return new Double(object.toString());
 	}
 }
