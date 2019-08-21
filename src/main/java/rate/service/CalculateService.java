@@ -26,7 +26,7 @@ public class CalculateService extends PrevaylerService {
 
 				// rate not found
 				if (rateReturn == null) {
-					return 0.0;
+					throw new Exception("rate not found");
 				}
 
 				Plan planReturn = getPlan(data);
@@ -34,17 +34,20 @@ public class CalculateService extends PrevaylerService {
 				if (planReturn == null) {
 					// rate found, but without plan, so calculate
 					// minutes * value minute of rate
-					return minutes * rateReturn.getMinute();
+					return minutes.doubleValue() * rateReturn.getMinute().doubleValue();
 				}
 
-				int excedent = minutes - planReturn.getMinute();
+				double excedent = minutes - planReturn.getMinute();
 
-				if (excedent < 1)
+				if (excedent < 1) {
+					// inside the plan, free
 					return 0.0;
+				}
 
 				// rate, plan and minutes excedent found , so calculate
 				// minutes excedent * (value minute of rate + plan percentage)
-				return excedent * (rateReturn.getMinute() + (rateReturn.getMinute() * planReturn.getPercent() / 100));
+				return excedent * (rateReturn.getMinute().doubleValue()
+						+ (rateReturn.getMinute().doubleValue() * planReturn.getPercent().doubleValue() / 100.0));
 			}
 
 			private Plan getPlan(Object data) {

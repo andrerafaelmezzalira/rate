@@ -78,8 +78,11 @@ public class RateTest {
 		assertEquals(calculateService.calculate(11, 17, 80, 60), Double.valueOf("37.40"));
 		assertEquals(calculateService.calculate(18, 11, 200, null), Double.valueOf("380.0"));
 		assertEquals(calculateService.calculate(18, 11, 200, 120), Double.valueOf("167.20"));
-		assertEquals(calculateService.calculate(18, 17, 100, null), Double.valueOf("0.00"));
-		assertEquals(calculateService.calculate(18, 17, 100, 30), Double.valueOf("0.00"));
+		try {
+			calculateService.calculate(18, 17, 100, null);
+		} catch (Exception e) {
+			assertEquals(e.getMessage(), "rate not found");
+		}
 
 	}
 
